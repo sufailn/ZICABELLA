@@ -5,10 +5,25 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import Image from "next/image"
 
+const images = [
+  { id: 1, name: "Slim Fit Jeans", image: "/Explore/PremiumShirt.jpeg" },
+  { id: 2, name: "Designer T-Shirt", image: "/explore/Designer tshirt.jpeg" },
+  { id: 3, name: "Cargo Pants Elite", image: "/explore/Cargo pants.jpeg" },
+  { id: 4, name: "Premium Cotton Shirt", image: "/explore/PremiumShirt.png" },
+  { id: 5, name: "Summer Co-ord Set", image: "/explore/Summer co ord set.jpeg" },
+  { id: 6, name: "Casual Shorts", image: "/explore/Casual shorts.jpeg" },
+  { id: 7, name: "Denim Jorts", image: "/explore/Denim jorts.jpeg" },
+  { id: 8, name: "Luxury Dress Shirt", image: "/explore/Luxury shirt.jpeg" },
+  { id: 9, name: "Premium Cotton Shirt", image: "/explore/PremiumShirt.png" },
+  { id: 10, name: "Designer T-Shirt", image: "/explore/Designer tshirt.jpeg" },
+  { id: 11, name: "Cargo Pants Elite", image: "/explore/Cargo pants1.jpeg" },
+  { id: 12, name: "Slim Fit Jeans", image: "/explore/Slim fit jean.jpeg" },
+]
+
 export default function FilipZrnzevicInspired() {
   const sectionRef = useRef(null)
-  const galleryRef = useRef(null)
-  const imagesRef = useRef([])
+  const galleryRef = useRef<HTMLDivElement>(null)
+  const imagesRef = useRef<(HTMLDivElement | null)[]>([])
 
   useGSAP(() => {
     const section = sectionRef.current
@@ -158,21 +173,23 @@ export default function FilipZrnzevicInspired() {
 
       <div className="relative overflow-hidden h-[600px]">
         <div ref={galleryRef} className="flex gap-8 px-4 absolute left-0">
-          {[1, 2, 3, 4, 5, 6].map((item) => (
+          {images.map((item, index) => (
             <div
-              key={item}
-              ref={(el) => (imagesRef.current[item - 1] = el)}
+              key={item.id}
+              ref={(el) => {
+                imagesRef.current[index] = el;
+              }}
               className="gallery-item relative w-[400px] h-[500px] flex-shrink-0 overflow-hidden rounded-xl perspective-1000 transform-style-preserve-3d"
             >
               <Image
-                src={`/placeholder.svg?height=1000&width=800`}
-                alt={`Fashion item ${item}`}
+                src={item.image}
+                alt={item.name}
                 fill
                 className="object-cover transition-transform duration-500"
               />
               <div className="image-overlay absolute inset-0 bg-black opacity-0 transition-opacity duration-300"></div>
               <div className="image-title absolute bottom-0 left-0 right-0 p-6 transform translate-y-20 opacity-0 transition-all duration-300">
-                <h3 className="text-white text-2xl font-bold">Artistic Series {item}</h3>
+                <h3 className="text-white text-2xl font-bold">{item.name}</h3>
                 <p className="text-white/80 mt-2">Zica Bella Exclusive</p>
               </div>
             </div>

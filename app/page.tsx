@@ -132,7 +132,7 @@ export default function Home() {
         <main>
           <Hero />
 
-          <div className="path-section relative py-20">
+          <div className="path-section relative py-0">
             <svg
               className="path-svg absolute top-0 left-0 w-full h-full"
               viewBox="0 0 1440 300"
